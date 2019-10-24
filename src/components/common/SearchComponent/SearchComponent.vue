@@ -10,7 +10,6 @@
           <li v-for="(value, index) in letters" :key="index" @click="addInput(value)">
             {{value}}
           </li>
-          <!-- <li @click="del">删除</li> -->
         </ul>
       </div>
     </div>

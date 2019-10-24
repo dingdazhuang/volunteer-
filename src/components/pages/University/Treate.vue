@@ -1,27 +1,32 @@
 <template>
   <div class="treate">
+    <div class="no-info">
+      <!-- <Ecomponent> -->
+
+      <!-- </Ecomponent> -->
+    </div>
     <table>
       <thead>
-        <th>
+        <tr>
           <td>批次</td>
           <td>专业名称</td>
           <td>计划数</td>
           <td>最低分</td>
           <td>最低位次</td>
-        </th>
+        </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>第一段</td>
-          <td>计算机电子信息技术</td>
-          <td>28</td>
-          <td>658</td>
-          <td>24680</td>
+        <tr v-for="v in majorData" :key="v.majorId">
+          <td>{{v.majorName.slice(1, 4)}}</td>
+          <td>{{v.majorName.slice(5)}}</td>
+          <td>{{v.jihuashu}}</td>
+          <td>{{v.zuidifen}}</td>
+          <td>{{v.zuidiweici}}</td>
         </tr>
       </tbody>
     </table>
     <div class="pagination">
-      <div class="">共找到<span>28条</span>录取数据</div>
+      <div class="">共找到<span>{{majorData.length || null}}条</span>录取数据</div>
       <div>
         <a href="">上一页</a>
         <a href="">下一页</a>
@@ -30,19 +35,24 @@
   </div>
 </template>
 <script>
+import Ecomponent from '@/components/common/Ecomponent/Ecomponent'
 export default {
   name: 'treate',
   data () {
     return {
       data: JSON.parse(sessionStorage.getItem('univercityInfo')),
-      universityId: sessionStorage.getItem('univercityId')
+      universityId: sessionStorage.getItem('univercityId'),
+      majorData: ''
     }
   },
   methods: {
     getData () {
       const _this = this
-      this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/history/major?univercityId=vvCH4&p=0&s=5').then(res => {
+      console.log(this.univercityId)
+      this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/history/major', { params: { universityId: _this.universityId, p: 0, s: 10 }}).then(res => {
         console.log(1, res, _this)
+        _this.majorData = res.data.result.major.list
+        console.log(_this.majorData)
       })
     }
   },
@@ -55,6 +65,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .treate{
+  width: 100%;
   table {
     width: 100%;
     background: #14305e;

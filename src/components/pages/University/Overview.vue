@@ -9,6 +9,7 @@
       </div>
       <div class="detail">
         {{data.summary ? data.summary : '无学校介绍'}}
+        Overview
       </div>
     </div>
   </div>
@@ -38,11 +39,13 @@ export default {
     font-size: 22px;
     line-height: 50px;
     position: relative;
+    background: #132C5B;
     .info {
       width: 1134px;
       height: 303px;
       margin: 31px auto;
       overflow: hidden;
+      background: #132C5B;
       .green{
         color: #00dd88;
       }

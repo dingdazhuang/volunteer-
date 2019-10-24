@@ -1,6 +1,7 @@
 <template>
   <div class="homePage">
     <div class="leftTabs">
+      这是home
       <main-tabs></main-tabs>
     </div>
     <div class="rightContent">

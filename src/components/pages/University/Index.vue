@@ -59,6 +59,7 @@ export default {
     initData () {
       const _this = this
       this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/university/detail', {params: {name: _this.name}}).then(res => {
+        console.log(res)
         _this.colleageDate = res.data.result.university
         console.log(_this.colleageDate)
         _this.storeUnivercityId(_this.colleageDate.id)
