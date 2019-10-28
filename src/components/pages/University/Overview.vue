@@ -15,6 +15,8 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Overview',
   data () {
@@ -26,6 +28,7 @@ export default {
     getDate () {
     }
   },
+  computed: mapState(['text']),
   mounted () {
     this.getDate()
   }

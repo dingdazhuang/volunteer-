@@ -42,12 +42,13 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'University',
   data () {
     return {
       index: 'overview',
-      name: sessionStorage.getItem('uniName'),
+      // name: this.uniName,
       colleageDate: []
     }
   },
@@ -57,10 +58,13 @@ export default {
       this.index = index
     },
     initData () {
+      console.log(this.uniName)
       const _this = this
-      this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/university/detail', {params: {name: _this.name}}).then(res => {
+      this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/university/detail', {params: {name: _this.uniName}}).then(res => {
         console.log(res)
-        _this.colleageDate = res.data.result.university
+        if (res) {
+        // _this.colleageDate = res.data.result.university
+        }
         console.log(_this.colleageDate)
         _this.storeUnivercityId(_this.colleageDate.id)
         sessionStorage.setItem('univercityInfo', JSON.stringify(_this.colleageDate))
@@ -71,12 +75,13 @@ export default {
     }
   },
   computed: {
+    ...mapState(['uniName']),
     tags () {
-      return this.colleageDate.tags.split(',').filter(v => v !== '').slice(0, 3)
+      return [] || this.colleageDate.tags.split(',').filter(v => v !== '').slice(0, 3)
     }
   },
   mounted () {
-    this.initData()
+    // this.initData()
   }
 }
 </script>

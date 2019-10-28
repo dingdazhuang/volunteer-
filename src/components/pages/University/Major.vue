@@ -56,7 +56,7 @@ export default {
     li{
       width: 44%;
       font-size: 22px;
-      padding: 22px 3%;
+      padding: 26px 3%;
       span{
         font-size: 20px;
         display: inline-block;

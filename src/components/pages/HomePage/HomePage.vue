@@ -1,7 +1,7 @@
 <template>
   <div class="homePage">
     <div class="leftTabs">
-      这是home
+      这是home111
       <main-tabs></main-tabs>
     </div>
     <div class="rightContent">
