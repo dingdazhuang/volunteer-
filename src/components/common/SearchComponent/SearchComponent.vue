@@ -10,7 +10,6 @@
           <li v-for="(value, index) in letters" :key="index" @click="addInput(value)">
             {{value}}
           </li>
-          <!-- <li @click="del">删除</li> -->
         </ul>
       </div>
     </div>
@@ -42,7 +41,7 @@
 </template>
 <script>
 import Ecomponent from '@/components/common/Ecomponent/Ecomponent'
-
+import { mapMutations } from 'vuex'
 export default {
   name: '',
   components: {
@@ -72,12 +71,12 @@ export default {
       }
       this.search(this.userInput)
     },
-    jumpToDetail (v) {
-      this.$router.push('/university')
-    },
     saveUniName (v) {
+      // 点击搜索结果将点击的大学名字存储到vuex
       sessionStorage.setItem('uniName', v)
-    }
+      this.storeUniName(v)
+    },
+    ...mapMutations(['storeUniName'])
   },
   computed: {
     letters () {

@@ -6,6 +6,7 @@ import router from './router'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import store from './vuex/index.js'
 
 Vue.config.productionTip = false
 
@@ -18,5 +19,6 @@ new Vue({
   // el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store
 }).$mount('#app')

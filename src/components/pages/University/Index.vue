@@ -42,12 +42,12 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'University',
   data () {
     return {
       index: 'overview',
-      name: sessionStorage.getItem('uniName'),
       colleageDate: []
     }
   },
@@ -57,19 +57,27 @@ export default {
       this.index = index
     },
     initData () {
+      console.log(1, this.uniName)
       const _this = this
-      this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/university/detail', {params: {name: _this.name}}).then(res => {
+      this.$axios.get('https://api.yunzhiyuan100.com/api/3.0/hs/university/detail', {params: {name: _this.uniName}}).then(res => {
+        console.log(res)
         _this.colleageDate = res.data.result.university
-        console.log(_this.colleageDate)
+        sessionStorage.setItem('uInfo', JSON.stringify(_this.colleageDate))
+        console.log('3', _this.colleageDate)
         _this.storeUnivercityId(_this.colleageDate.id)
-        sessionStorage.setItem('univercityInfo', JSON.stringify(_this.colleageDate))
+        // _this.storeInfo(res.data.result.university)
+        console.log('aa', JSON.stringify(_this.colleageDate))
+       
       })
     },
     storeUnivercityId (v) {
-      sessionStorage.setItem('univercityId', v)
+      sessionStorage.setItem('univercityId', v);
+      // this.storeId(v)
     }
   },
   computed: {
+    ...mapState(['uniName']),
+    ...mapMutations(['storeId', 'storeInfo']),
     tags () {
       return this.colleageDate.tags.split(',').filter(v => v !== '').slice(0, 3)
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="major">
-    <div class="no-major">
+    <div class="no-major" v-if="!MajorHotVOS && MajorHotVOS.length === 0">
       <Ecomponent>
         <div class="content">
           <img src="../../../assets/images/imgs/nodata.png" alt="">
@@ -8,10 +8,10 @@
         </div>
       </Ecomponent>
     </div>
-    <!-- <ul v-if="MajorHotVOS && MajorHotVOS.length > 0" class="major-list">
+    <ul v-if="MajorHotVOS && MajorHotVOS.length > 0" class="major-list">
       <li v-for="(v, index) in MajorHotVOS" :key="index">
         <span :class="[ index === 0 ? 'major-1' : '', index === 1 ? 'major-2' : '', index > 1 ? 'major-3' : '' ]">Top {{index + 1}}</span>{{v.majorName}}</li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 <script>
@@ -23,13 +23,13 @@ export default {
   },
   data () {
     return {
-      data: JSON.parse(sessionStorage.getItem('univercityInfo'))
+      data: JSON.parse(sessionStorage.getItem('uInfo'))
     }
   },
   computed: {
-    // MajorHotVOS () {
-    //   // return this.data.hsMajorHotVOS || []
-    // }
+    MajorHotVOS () {
+      return this.data.hsMajorHotVOS
+    }
   }
 }
 </script>
@@ -37,6 +37,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .major {
+  width: 100%;
+  position: relative;
+  background-color: #122657;
+  .no-major{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
   .major-list {
     display: flex;
     justify-content: space-between;
@@ -45,7 +55,7 @@ export default {
     li{
       width: 44%;
       font-size: 22px;
-      padding: 37px 3%;
+      padding: 26px 3%;
       span{
         font-size: 20px;
         display: inline-block;

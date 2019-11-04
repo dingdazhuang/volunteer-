@@ -5,7 +5,7 @@
         学校官网：<a class="green" :href="data.url">{{data.url}}</a>
       </div>
       <div>
-        招办电话：<span class="green">{{data.phone}}</span>
+        招办电话：<span class="green">{{data.uniInfo}}</span>
       </div>
       <div class="detail">
         {{data.summary ? data.summary : '无学校介绍'}}
@@ -14,17 +14,21 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Overview',
   data () {
     return {
-      data: JSON.parse(sessionStorage.getItem('univercityInfo'))
+      data: JSON.parse(sessionStorage.getItem('uInfo'))
     }
   },
   methods: {
     getDate () {
+      console.log('2', JSON.parse(sessionStorage.getItem('uInfo')))
     }
   },
+  // computed: mapState(['text', 'uniInfo']),
   mounted () {
     this.getDate()
   }
@@ -38,11 +42,13 @@ export default {
     font-size: 22px;
     line-height: 50px;
     position: relative;
+    background: #132C5B;
     .info {
       width: 1134px;
       height: 303px;
       margin: 31px auto;
       overflow: hidden;
+      background: #132C5B;
       .green{
         color: #00dd88;
       }
