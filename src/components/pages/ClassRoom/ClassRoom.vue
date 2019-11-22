@@ -67,7 +67,6 @@ export default {
       position: absolute;
       right: -10px;
       top: 0;
-      z-index: -1;
     }
     .video-box{
       width: 654px;

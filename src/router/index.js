@@ -23,7 +23,7 @@ export default new Router({
       component: HomePage,
       children: [
         {
-          path: '/',
+          path: '',
           redirect: 'classroom'
         },
         {

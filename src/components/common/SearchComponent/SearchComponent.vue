@@ -42,6 +42,7 @@
 <script>
 import Ecomponent from '@/components/common/Ecomponent/Ecomponent'
 import { mapMutations } from 'vuex'
+import get from '@/api/api'
 export default {
   name: '',
   components: {
@@ -56,7 +57,7 @@ export default {
   methods: {
     search () {
       const _this = this
-      this.$axios.get('https://api.yunzhiyuan100.com/api/2.0/university/universityByLetters', {params: { q: this.userInput }}).then(res => {
+      get('/university/universityByLetters', {params: { q: this.userInput }}).then(res => {
         _this.searchResult = res.data.result.list
         console.log(res)
         console.log(_this.searchResult)
